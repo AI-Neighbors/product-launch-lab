@@ -1,0 +1,32 @@
+name: Submission check
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate-submission
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Test event kit
+        run: bash scripts/test-event-kit.sh
+
+      - name: Validate participant branch
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [[ "$HEAD_BRANCH" == pilot-01/* ]]; then
+            handle="${HEAD_BRANCH#pilot-01/}"
+            GITHUB_HEAD_REF="$HEAD_BRANCH" bash scripts/check-submission.sh "$handle" "$BASE_SHA"
+          else
+            echo "Maintenance branch: participant-specific validation skipped"
+          fi
