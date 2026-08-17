@@ -2,6 +2,8 @@
 
 Заполни значения справа от двоеточия. Эти labels проверяет script.
 
+Artifacts: [`INPUT.md`](./INPUT.md) · [`01-POSITIONING.md`](./01-POSITIONING.md) · [`02-DEMO.md`](./02-DEMO.md) · [`03-DISTRIBUTION.md`](./03-DISTRIBUTION.md)
+
 - Participant GitHub handle: REPLACE_ME
 - Public/contact handle: REPLACE_ME
 - Product: REPLACE_ME

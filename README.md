@@ -1,6 +1,6 @@
 ---
 title: Product Launch Lab
-version: 0.5.0
+version: 0.6.0
 updated: 2026-08-17
 status: ready-for-pilot
 ---
@@ -21,11 +21,11 @@ status: ready-for-pilot
 
 | Когда | Открой | Готово, когда |
 |---|---|---|
-| До встречи | `INPUT.md` | Product работает, один scenario и limits известны |
-| Round 1 | `01-POSITIONING.md` | User, outcome, proof и CTA понятны за 20 секунд |
-| Round 2 | `02-DEMO.md` | 60–90s video URL открывается и показывает один scenario |
-| Round 3 | `03-DISTRIBUTION.md` | Готовы post, DM, 10 targets и одна metric |
-| Finish | `SUBMISSION.md` | Check прошёл, PR открыт |
+| До встречи | [`INPUT.md`](participants/_template/INPUT.md) | Product работает, один scenario и limits известны |
+| Round 1 | [`01-POSITIONING.md`](participants/_template/01-POSITIONING.md) | User, outcome, proof и CTA понятны за 20 секунд |
+| Round 2 | [`02-DEMO.md`](participants/_template/02-DEMO.md) | 60–90s video URL открывается и показывает один scenario |
+| Round 3 | [`03-DISTRIBUTION.md`](participants/_template/03-DISTRIBUTION.md) | Готовы post, DM, 10 targets и одна metric |
+| Finish | [`SUBMISSION.md`](participants/_template/SUBMISSION.md) | Check прошёл, PR открыт |
 
 Во время Lab следуй текущему сообщению ведущего и [`kit/WORKBOOK.md`](kit/WORKBOOK.md). Agent prompts лежат в [`kit/prompts/`](kit/prompts/).
 
@@ -47,6 +47,30 @@ bash scripts/init-participant.sh YOUR_GITHUB_HANDLE --test RUN_ID
 
 Рабочая ветка будет `test/<run-id>/<github-handle>`, PR base — `rehearsal/<run-id>`.
 
+## Ветки и направление merge
+
+```mermaid
+flowchart LR
+  T["test/run-id/handle<br/>rehearsal work"] -->|"PR merge"| R["rehearsal/run-id<br/>isolated sandbox"]
+  R -.->|"curate; raw result не merge"| E["examples/product<br/>maintainer branch"]
+  E -->|"PR merge"| M["main"]
+  P["pilot-01/handle<br/>real event later"] -->|"PR merge"| M
+```
+
+- `test/<run-id>/<handle>` — рабочая source/head branch одного rehearsal participant.
+- `rehearsal/<run-id>` — отдельная target/base branch конкретной репетиции.
+- `pilot-01/<handle>` — ветка настоящего Pilot 01; для rehearsal она не используется.
+- Raw rehearsal merge идёт только `test/...` → `rehearsal/...`. В `main` позже попадает отдельный очищенный example через maintainer PR.
+
+Текущий HealthOS rehearsal:
+
+```text
+test/2026W34-healthos-01/developerisnow
+  └─ PR → rehearsal/2026W34-healthos-01
+```
+
+Base уже видна на GitHub: [`rehearsal/2026W34-healthos-01`](https://github.com/AI-Neighbors/product-launch-lab/tree/rehearsal/2026W34-healthos-01). Working branch получит GitHub URL после первого push.
+
 Запусти Codex или другой coding agent в корне repo и напиши:
 
 ```text
@@ -66,12 +90,24 @@ Project-local Participant Coach определит current phase, покажет
 
 ## Finish
 
+Pilot 01:
+
 ```bash
 bash scripts/check-submission.sh YOUR_GITHUB_HANDLE origin/main
 git add participants/YOUR_GITHUB_HANDLE
 git commit -m "feat(capsule): add YOUR_GITHUB_HANDLE pilot-01 submission"
 git push -u origin pilot-01/YOUR_GITHUB_HANDLE
 gh pr create --base main --fill
+```
+
+Rehearsal:
+
+```bash
+bash scripts/check-submission.sh YOUR_GITHUB_HANDLE origin/rehearsal/RUN_ID
+git add participants/YOUR_GITHUB_HANDLE
+git commit -m "feat(capsule): add YOUR_GITHUB_HANDLE rehearsal submission"
+git push -u origin test/RUN_ID/YOUR_GITHUB_HANDLE
+gh pr create --draft --base rehearsal/RUN_ID --head test/RUN_ID/YOUR_GITHUB_HANDLE --fill
 ```
 
 ## Не клади сюда
