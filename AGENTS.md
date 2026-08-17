@@ -9,7 +9,7 @@
 ## Перед работой
 
 1. Прочитай `kit/WORKBOOK.md`.
-2. Определи GitHub handle владельца.
+2. Определи GitHub handle владельца. Он задаёт branch/folder; public/contact handle может отличаться.
 3. Прочитай его `participants/<handle>/INPUT.md` и только текущий round file.
 4. Проверь branch: `pilot-01/<handle>`.
 

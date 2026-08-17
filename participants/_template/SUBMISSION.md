@@ -2,7 +2,8 @@
 
 Заполни значения справа от двоеточия. Эти labels проверяет script.
 
-- Participant: REPLACE_ME
+- Participant GitHub handle: REPLACE_ME
+- Public/contact handle: REPLACE_ME
 - Product: REPLACE_ME
 - One-liner: REPLACE_ME
 - Product page URL: REPLACE_ME

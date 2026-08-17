@@ -38,7 +38,10 @@ for file in participants/alex/*.md; do
 done
 find participants/alex -name '*.bak' -delete
 
-sed -i.bak 's/- Participant: verified value/- Participant: alex/' participants/alex/SUBMISSION.md
+sed -i.bak 's/- GitHub handle: verified value/- GitHub handle: alex/' participants/alex/INPUT.md
+sed -i.bak 's/- Public\/contact handle (optional): verified value/- Public\/contact handle (optional): @alex_neighbor/' participants/alex/INPUT.md
+sed -i.bak 's/- Participant GitHub handle: verified value/- Participant GitHub handle: alex/' participants/alex/SUBMISSION.md
+sed -i.bak 's/- Public\/contact handle: verified value/- Public\/contact handle: @alex_neighbor/' participants/alex/SUBMISSION.md
 sed -i.bak 's/- One-liner: verified value/- One-liner: A verified product outcome for a specific user/' participants/alex/SUBMISSION.md
 sed -i.bak 's|- Product page URL: verified value|- Product page URL: https://product.example/|' participants/alex/SUBMISSION.md
 sed -i.bak 's|- Video URL: verified value|- Video URL: https://video.example/demo|' participants/alex/SUBMISSION.md

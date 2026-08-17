@@ -70,7 +70,7 @@ field() {
 }
 
 if [[ -s "$submission" ]]; then
-  participant="$(field "Participant")"
+  participant="$(field "Participant GitHub handle")"
   product="$(field "Product")"
   one_liner="$(field "One-liner")"
   page_url="$(field "Product page URL")"
@@ -82,7 +82,7 @@ if [[ -s "$submission" ]]; then
   first_send="$(field "First send/publish date")"
   baseline_tag="$(field "Baseline tag")"
 
-  [[ "$participant" == "$handle" ]] || fail "Participant must equal $handle"
+  [[ "$participant" == "$handle" ]] || fail "Participant GitHub handle must equal $handle"
   [[ -n "$product" ]] || fail "Product is empty"
   [[ ${#one_liner} -ge 20 ]] || fail "One-liner is too short"
   if [[ ! "$page_url" =~ ^https:// ]] && [[ "$page_url" != "Product Card in 01-POSITIONING.md" ]]; then

@@ -1,6 +1,6 @@
 ---
 title: Product Launch Lab
-version: 0.3.0
+version: 0.4.0
 updated: 2026-08-17
 status: ready-for-pilot
 ---
@@ -42,7 +42,7 @@ bash scripts/init-participant.sh YOUR_GITHUB_HANDLE
 Запусти Codex или другой coding agent в корне repo и напиши:
 
 ```text
-Я <github-handle>. Продукт <название>. Начни Product Launch Lab.
+Я <github-handle>. Мой contact handle <optional>. Продукт <название>. Начни Product Launch Lab.
 ```
 
 Project-local Participant Coach определит current phase, покажет один exact file и будет задавать по одному вопросу. Можно спрашивать что угодно: сначала он ответит, затем вернёт тебя к текущему шагу.

@@ -11,6 +11,7 @@ description: Веди участника Product Launch Lab от prework до PR
 
 1. Выполни `git branch --show-current` и `git status --short`.
 2. Из branch `pilot-01/<handle>` определи handle и folder `participants/<handle>/`.
+   GitHub handle задаёт branch/folder ownership. Telegram или другой public/contact handle может отличаться и хранится отдельным полем.
 3. Если participant folder отсутствует, попроси GitHub handle и предложи выполнить `bash scripts/init-participant.sh <handle>`.
 4. Прочитай `kit/WORKBOOK.md`, `participants/<handle>/INPUT.md` и только текущий round file.
 5. Product source можно читать только по пути, который дал участник. Не изменяй и не копируй его в event repo.
@@ -43,7 +44,7 @@ description: Веди участника Product Launch Lab от prework до PR
 ▶ Первый шаг: <одно действие или один вопрос>
 ```
 
-Если handle и product name уже даны, не спрашивай их повторно.
+Если GitHub handle, contact handle и product name уже даны, не спрашивай их повторно и не смешивай GitHub identity с Telegram username.
 
 ## Каждый следующий ответ
 

@@ -4,6 +4,8 @@
 
 ## Сейчас
 
+- GitHub handle: REPLACE_ME
+- Public/contact handle (optional): REPLACE_ME
 - Product name: REPLACE_ME
 - Product URL or local demo path: REPLACE_ME
 - Stage: REPLACE_ME
