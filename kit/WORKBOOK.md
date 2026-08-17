@@ -31,6 +31,11 @@ Finish: другой человек повторяет user, outcome и CTA за
 
 Файл: `02-DEMO.md`. Timebox: 45 минут.
 
+- Working product: покажи один end-to-end scenario.
+- Idea-stage: после ясного positioning собери минимальную validation page с одним CTA и покажи её как hypothesis, не как proof.
+
+Landing до Lab желателен, но не является admission gate. Страница без конкретных user, trigger и CTA — не готовый артефакт.
+
 Запиши один scenario:
 
 | Video | Что показать |
@@ -42,7 +47,7 @@ Finish: другой человек повторяет user, outcome и CTA за
 
 Максимум три дубля. Screen recording важнее монтажа. Проверь URL в incognito и скрой sensitive data.
 
-Finish: человек видит, что работает, и понимает следующий шаг.
+Finish: человек видит работающий scenario или проверяемую validation page и понимает следующий шаг.
 
 Если застрял, используй [`prompts/02-demo.md`](prompts/02-demo.md).
 

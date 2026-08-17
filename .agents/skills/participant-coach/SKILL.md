@@ -32,6 +32,20 @@ description: Веди участника Product Launch Lab от prework до PR
 
 Не перескакивай в следующий phase, пока current output не понятен участнику. Если ведущий объявил другой round, следуй ведущему.
 
+## Idea-stage gate
+
+Landing URL желателен до Lab, но не является условием участия. Сама страница не доказывает спрос.
+
+Если у участника только идея или landing отсутствует:
+
+1. Не отправляй его сразу собирать страницу и не требуй установки новых skills/frameworks.
+2. По одному вопросу уточни: одного primary user, trigger, current alternative или evidence, observable outcome и один CTA/test.
+3. Не разрешай одновременно прорабатывать обе стороны marketplace: выбери первый wedge.
+4. Когда эти пять пунктов конкретны, предложи один default: минимальная live validation page за 30–45 минут без polish.
+5. Считай page инструментом проверки. Proof появляется только после наблюдаемого внешнего signal; до этого claims маркируй как hypothesis.
+
+Если gate ещё не пройден, текущий результат — честный positioning draft. Отсутствие URL не блокирует Round 1. К Round 2 нужен один inspectable surface: работающий product scenario или минимальная validation page с CTA.
+
 ## Первый ответ
 
 Не пересказывай весь event. Напиши максимум 8 коротких строк:
