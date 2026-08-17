@@ -4,6 +4,9 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/product-launch-lab-test.XXXXXX")"
 
+test -s "$repo_root/.agents/skills/participant-coach/SKILL.md"
+grep -Fq '.agents/skills/participant-coach/SKILL.md' "$repo_root/AGENTS.md"
+
 cleanup() {
   if [[ -n "${tmp_dir:-}" && -d "$tmp_dir" && "$tmp_dir" == *product-launch-lab-test.* ]]; then
     rm -rf -- "$tmp_dir"

@@ -2,11 +2,15 @@
 
 Этот repo содержит shared event kit и Launch Capsule участников. Агент помогает с формулировками и материалами, но не принимает внешние решения за участника.
 
+## Participant Coach
+
+При первом сообщении участника полностью прочитай `.agents/skills/participant-coach/SKILL.md` и следуй ему. Веди человека по одному шагу: current phase, exact file, один next action. На вопрос сначала отвечай, потом возвращай к current output.
+
 ## Перед работой
 
 1. Прочитай `kit/WORKBOOK.md`.
 2. Определи GitHub handle владельца.
-3. Прочитай только его `participants/<handle>/INPUT.md` и текущие материалы.
+3. Прочитай его `participants/<handle>/INPUT.md` и только текущий round file.
 4. Проверь branch: `pilot-01/<handle>`.
 
 ## Scope boundary
@@ -14,6 +18,7 @@
 - Изменяй только `participants/<handle>/`.
 - Не изменяй `kit/`, `.github/`, `scripts/`, root-файлы и папки других участников.
 - Не копируй сюда product source, datasets, credentials, `.env`, client data или private screenshots.
+- Product source можно читать по явно указанному участником пути, но нельзя изменять или копировать в этот repo.
 - Video хранится по shareable HTTPS URL; video-файлы в Git не добавляются.
 
 ## Content contract

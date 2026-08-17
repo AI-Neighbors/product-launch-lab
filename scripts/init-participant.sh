@@ -48,4 +48,5 @@ git config core.hooksPath .githooks
 echo "READY: $branch"
 echo "NEXT: fill $folder/INPUT.md"
 echo "GUARD: repo-local hook blocks direct pushes to main"
+echo "AGENT: say 'Я $handle. Продукт <название>. Начни Product Launch Lab.'"
 echo "CHECK: bash scripts/check-submission.sh $handle origin/main"

@@ -1,6 +1,6 @@
 ---
 title: Product Launch Lab
-version: 0.2.0
+version: 0.3.0
 updated: 2026-08-17
 status: ready-for-pilot
 ---
@@ -39,7 +39,15 @@ bash scripts/init-participant.sh YOUR_GITHUB_HANDLE
 
 Команда создаёт branch/folder и включает repo-local hook, который блокирует прямой push в `main`.
 
-Затем:
+Запусти Codex или другой coding agent в корне repo и напиши:
+
+```text
+Я <github-handle>. Продукт <название>. Начни Product Launch Lab.
+```
+
+Project-local Participant Coach определит current phase, покажет один exact file и будет задавать по одному вопросу. Можно спрашивать что угодно: сначала он ответит, затем вернёт тебя к текущему шагу.
+
+До встречи:
 
 1. Заполни `participants/YOUR_GITHUB_HANDLE/INPUT.md`.
 2. Сделай test push.
