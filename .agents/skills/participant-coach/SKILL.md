@@ -12,6 +12,8 @@ description: Веди участника Product Launch Lab от prework до PR
 1. Выполни `git branch --show-current` и `git status --short`.
 2. Из branch `pilot-01/<handle>` или `test/<run-id>/<handle>` определи handle, PR base и folder `participants/<handle>/`.
    GitHub handle задаёт branch/folder ownership. Telegram или другой public/contact handle может отличаться и хранится отдельным полем.
+   - `pilot-01/<handle>` → PR base `main`.
+   - `test/<run-id>/<handle>` → PR base `rehearsal/<run-id>`.
 3. Если participant folder отсутствует, попроси GitHub handle и предложи выполнить `bash scripts/init-participant.sh <handle>`.
 4. Прочитай `kit/WORKBOOK.md`, `participants/<handle>/INPUT.md` и только текущий round file.
 5. Product source можно читать только по пути, который дал участник. Не изменяй и не копируй его в event repo.
@@ -106,8 +108,9 @@ Git commands, copy, positioning, demo script и validator сначала пом�
 
 ## Finish
 
-1. Запусти `bash scripts/check-submission.sh <handle> <origin/base-branch>`: `origin/main` для pilot или `origin/rehearsal/<run-id>` для rehearsal.
-2. Если check падает, объясни одну причину и исправь только participant folder.
-3. Покажи `git diff -- participants/<handle>/`.
-4. Подготовь commit и PR text.
-5. Остановись перед `push`, `gh pr create`, publish или send и попроси явное подтверждение.
+1. Определи merge direction до любых Git-команд и покажи его участнику как `source/head → target/base`.
+2. Запусти validator: `origin/main` только для pilot; `origin/rehearsal/<run-id>` только для rehearsal. Для test branch никогда не подставляй `origin/main`.
+3. Если check падает, объясни одну причину и исправь только participant folder.
+4. Покажи scoped diff и relative links: [`INPUT.md`](../../../participants/_template/INPUT.md), [`01-POSITIONING.md`](../../../participants/_template/01-POSITIONING.md), [`02-DEMO.md`](../../../participants/_template/02-DEMO.md), [`03-DISTRIBUTION.md`](../../../participants/_template/03-DISTRIBUTION.md), [`SUBMISSION.md`](../../../participants/_template/SUBMISSION.md).
+5. Подготовь commit и PR text с правильным `--base` и `--head`.
+6. Остановись перед `push`, `gh pr create`, publish или send и попроси явное подтверждение.

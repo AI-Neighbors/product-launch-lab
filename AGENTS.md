@@ -13,6 +13,18 @@
 3. Прочитай его `participants/<handle>/INPUT.md` и только текущий round file.
 4. Проверь branch: `pilot-01/<handle>` или `test/<run-id>/<handle>`.
 
+## Branch contract
+
+| Working branch | PR base | Назначение |
+|---|---|---|
+| `test/<run-id>/<handle>` | `rehearsal/<run-id>` | Изолированная репетиция |
+| `pilot-01/<handle>` | `main` | Настоящий Pilot 01 |
+
+- Для test branch никогда не используй `origin/main` как validator base или PR base.
+- Raw rehearsal merge идёт только `test/...` → `rehearsal/...`; raw participant result не merge’ится в `main`.
+- Curated example попадает в `main` позже отдельным maintainer PR.
+- Human-readable diagram и команды: [`README.md`](README.md#ветки-и-направление-merge).
+
 ## Scope boundary
 
 - Изменяй только `participants/<handle>/`.
@@ -39,7 +51,11 @@
 ## Finish
 
 ```bash
-bash scripts/check-submission.sh <handle> <origin/base-branch>
+# pilot
+bash scripts/check-submission.sh <handle> origin/main
+
+# rehearsal
+bash scripts/check-submission.sh <handle> origin/rehearsal/<run-id>
 ```
 
-Затем покажи участнику diff и дай ему самому подтвердить PR и внешние действия.
+Затем покажи участнику diff, source/head branch, target/base branch и clickable artifact links. Дай ему самому подтвердить push, PR и внешние действия.
