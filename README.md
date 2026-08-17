@@ -9,9 +9,11 @@ status: ready-for-pilot
 
 ## Start here: 2 минуты
 
-- За 4 часа ты не дописываешь продукт. Ты готовишь его первый понятный выход наружу.
+- За 4 часа ты не дописываешь продукт. Ты готовишь работающий продукт или идею к первому понятному тесту наружу.
 - На каждом раунде открыт один файл. Остальное пока не трогай.
 - К концу нужен draft PR. Публикация и рассылка только после твоего решения.
+
+Работающий landing URL до Lab желателен, но не обязателен. Для idea-stage сначала выбираем одного user, trigger и CTA; затем делаем минимальную validation page без polish.
 
 Результат:
 
@@ -21,7 +23,7 @@ status: ready-for-pilot
 
 | Когда | Открой | Готово, когда |
 |---|---|---|
-| До встречи | [`INPUT.md`](participants/_template/INPUT.md) | Product работает, один scenario и limits известны |
+| До встречи | [`INPUT.md`](participants/_template/INPUT.md) | Stage, текущий surface или hypothesis и limits указаны честно |
 | Round 1 | [`01-POSITIONING.md`](participants/_template/01-POSITIONING.md) | User, outcome, proof и CTA понятны за 20 секунд |
 | Round 2 | [`02-DEMO.md`](participants/_template/02-DEMO.md) | 60–90s video URL открывается и показывает один scenario |
 | Round 3 | [`03-DISTRIBUTION.md`](participants/_template/03-DISTRIBUTION.md) | Готовы post, DM, 10 targets и одна metric |
@@ -83,8 +85,8 @@ Project-local Participant Coach определит current phase, покажет
 
 1. Заполни `participants/YOUR_GITHUB_HANDLE/INPUT.md`.
 2. Сделай test push.
-3. Запиши 10 секунд экрана знакомым recorder.
-4. Открой share link в incognito.
+3. Если product/landing уже есть, запиши 10 секунд экрана знакомым recorder.
+4. Открой существующий share link в incognito. Если URL пока нет, не собирай страницу до выбора user, trigger и CTA.
 
 Используй Loom, QuickTime или уже знакомый инструмент. Creative AI tools не нужны. Video-файл в Git не добавляй.
 
