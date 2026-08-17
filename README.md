@@ -37,6 +37,8 @@ cd product-launch-lab
 bash scripts/init-participant.sh YOUR_GITHUB_HANDLE
 ```
 
+Команда создаёт branch/folder и включает repo-local hook, который блокирует прямой push в `main`.
+
 Затем:
 
 1. Заполни `participants/YOUR_GITHUB_HANDLE/INPUT.md`.

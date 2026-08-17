@@ -43,7 +43,9 @@ if git remote get-url origin >/dev/null 2>&1; then
 fi
 git switch -c "$branch"
 cp -R participants/_template "$folder"
+git config core.hooksPath .githooks
 
 echo "READY: $branch"
 echo "NEXT: fill $folder/INPUT.md"
+echo "GUARD: repo-local hook blocks direct pushes to main"
 echo "CHECK: bash scripts/check-submission.sh $handle origin/main"

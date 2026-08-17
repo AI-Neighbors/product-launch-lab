@@ -11,9 +11,10 @@ cleanup() {
 }
 trap cleanup EXIT
 
-mkdir -p "$tmp_dir/scripts" "$tmp_dir/participants"
+mkdir -p "$tmp_dir/scripts" "$tmp_dir/participants" "$tmp_dir/.githooks"
 cp "$repo_root/scripts/check-submission.sh" "$repo_root/scripts/init-participant.sh" "$tmp_dir/scripts/"
 cp -R "$repo_root/participants/_template" "$tmp_dir/participants/"
+cp "$repo_root/.githooks/pre-push" "$tmp_dir/.githooks/"
 
 cd "$tmp_dir"
 git init -q -b main
@@ -22,6 +23,12 @@ git config user.email "event-kit@example.invalid"
 git add .
 git commit -qm "test: baseline"
 bash scripts/init-participant.sh alex >/dev/null
+
+[[ "$(git config core.hooksPath)" == ".githooks" ]]
+if printf 'refs/heads/main local refs/heads/main remote\n' | .githooks/pre-push origin example >/dev/null 2>&1; then
+  echo "Expected pre-push hook to block main" >&2
+  exit 1
+fi
 
 for file in participants/alex/*.md; do
   sed -i.bak 's/REPLACE_ME/verified value/g' "$file"

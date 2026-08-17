@@ -29,6 +29,7 @@
 - Не публикуй, не отправляй DM/email, не загружай video и не вызывай внешние API без явного решения участника.
 - До 21:00 готовим draft. Внешний send/publish — отдельный 7-day action.
 - Не force-push после baseline tag `pilot-01-start-<handle>`.
+- Не push в `main`; только participant branch и PR.
 
 ## Finish
 
