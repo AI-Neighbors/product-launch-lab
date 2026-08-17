@@ -32,22 +32,38 @@ if printf 'refs/heads/main local refs/heads/main remote\n' | .githooks/pre-push 
   echo "Expected pre-push hook to block main" >&2
   exit 1
 fi
+if printf 'refs/heads/rehearsal/test local refs/heads/rehearsal/test remote\n' | .githooks/pre-push origin example >/dev/null 2>&1; then
+  echo "Expected pre-push hook to block rehearsal branch" >&2
+  exit 1
+fi
+if ! printf 'refs/heads/rehearsal/test local refs/heads/rehearsal/test remote\n' | \
+  EVENT_ADMIN_PUSH=1 .githooks/pre-push origin example >/dev/null 2>&1; then
+  echo "Expected admin override to allow rehearsal branch" >&2
+  exit 1
+fi
 
-for file in participants/alex/*.md; do
-  sed -i.bak 's/REPLACE_ME/verified value/g' "$file"
-done
-find participants/alex -name '*.bak' -delete
+fill_submission() {
+  local handle="$1"
+  local baseline_tag="$2"
 
-sed -i.bak 's/- GitHub handle: verified value/- GitHub handle: alex/' participants/alex/INPUT.md
-sed -i.bak 's/- Public\/contact handle (optional): verified value/- Public\/contact handle (optional): @alex_neighbor/' participants/alex/INPUT.md
-sed -i.bak 's/- Participant GitHub handle: verified value/- Participant GitHub handle: alex/' participants/alex/SUBMISSION.md
-sed -i.bak 's/- Public\/contact handle: verified value/- Public\/contact handle: @alex_neighbor/' participants/alex/SUBMISSION.md
-sed -i.bak 's/- One-liner: verified value/- One-liner: A verified product outcome for a specific user/' participants/alex/SUBMISSION.md
-sed -i.bak 's|- Product page URL: verified value|- Product page URL: https://product.example/|' participants/alex/SUBMISSION.md
-sed -i.bak 's|- Video URL: verified value|- Video URL: https://video.example/demo|' participants/alex/SUBMISSION.md
-sed -i.bak 's/- First send\/publish date: verified value/- First send\/publish date: 2026-08-24/' participants/alex/SUBMISSION.md
-sed -i.bak 's/- Baseline tag: verified value/- Baseline tag: pilot-01-start-alex/' participants/alex/SUBMISSION.md
-find participants/alex -name '*.bak' -delete
+  for file in "participants/$handle"/*.md; do
+    sed -i.bak 's/REPLACE_ME/verified value/g' "$file"
+  done
+  find "participants/$handle" -name '*.bak' -delete
+
+  sed -i.bak "s/- GitHub handle: verified value/- GitHub handle: $handle/" "participants/$handle/INPUT.md"
+  sed -i.bak 's/- Public\/contact handle (optional): verified value/- Public\/contact handle (optional): @alex_neighbor/' "participants/$handle/INPUT.md"
+  sed -i.bak "s/- Participant GitHub handle: verified value/- Participant GitHub handle: $handle/" "participants/$handle/SUBMISSION.md"
+  sed -i.bak 's/- Public\/contact handle: verified value/- Public\/contact handle: @alex_neighbor/' "participants/$handle/SUBMISSION.md"
+  sed -i.bak 's/- One-liner: verified value/- One-liner: A verified product outcome for a specific user/' "participants/$handle/SUBMISSION.md"
+  sed -i.bak 's|- Product page URL: verified value|- Product page URL: https://product.example/|' "participants/$handle/SUBMISSION.md"
+  sed -i.bak 's|- Video URL: verified value|- Video URL: https://video.example/demo|' "participants/$handle/SUBMISSION.md"
+  sed -i.bak 's/- First send\/publish date: verified value/- First send\/publish date: 2026-08-24/' "participants/$handle/SUBMISSION.md"
+  sed -i.bak "s/- Baseline tag: verified value/- Baseline tag: $baseline_tag/" "participants/$handle/SUBMISSION.md"
+  find "participants/$handle" -name '*.bak' -delete
+}
+
+fill_submission alex pilot-01-start-alex
 
 git add participants/alex
 git commit -qm "test: valid participant"
@@ -57,6 +73,26 @@ bash scripts/check-submission.sh alex main >/dev/null
 echo "unexpected" >> README.md
 if bash scripts/check-submission.sh alex main >/dev/null 2>&1; then
   echo "Expected out-of-scope change to fail" >&2
+  exit 1
+fi
+rm -f -- README.md
+
+git switch -q main
+git branch rehearsal/2026W34-healthos-01 main
+bash scripts/init-participant.sh sam --test 2026W34-healthos-01 >/dev/null
+fill_submission sam test-2026W34-healthos-01-start-sam
+git add participants/sam
+git commit -qm "test: valid rehearsal participant"
+
+bash scripts/check-submission.sh sam rehearsal/2026W34-healthos-01 >/dev/null
+
+if GITHUB_BASE_REF=main bash scripts/check-submission.sh sam rehearsal/2026W34-healthos-01 >/dev/null 2>&1; then
+  echo "Expected wrong rehearsal PR base to fail" >&2
+  exit 1
+fi
+if GITHUB_HEAD_REF=test/2026W34-healthos-01/wrong \
+  bash scripts/check-submission.sh sam rehearsal/2026W34-healthos-01 >/dev/null 2>&1; then
+  echo "Expected branch/handle mismatch to fail" >&2
   exit 1
 fi
 

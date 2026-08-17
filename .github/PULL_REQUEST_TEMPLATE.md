@@ -2,7 +2,8 @@
 
 - Participant: @GITHUB_HANDLE
 - Product: PRODUCT_NAME
-- Baseline tag: `pilot-01-start-GITHUB_HANDLE`
+- Baseline tag: `pilot-01-start-GITHUB_HANDLE` or `test-RUN_ID-start-GITHUB_HANDLE`
+- PR base: `main` or `rehearsal/RUN_ID`
 
 ## Human review
 

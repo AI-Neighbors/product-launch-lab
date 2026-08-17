@@ -11,7 +11,7 @@
 1. Прочитай `kit/WORKBOOK.md`.
 2. Определи GitHub handle владельца. Он задаёт branch/folder; public/contact handle может отличаться.
 3. Прочитай его `participants/<handle>/INPUT.md` и только текущий round file.
-4. Проверь branch: `pilot-01/<handle>`.
+4. Проверь branch: `pilot-01/<handle>` или `test/<run-id>/<handle>`.
 
 ## Scope boundary
 
@@ -33,13 +33,13 @@
 
 - Не публикуй, не отправляй DM/email, не загружай video и не вызывай внешние API без явного решения участника.
 - До 21:00 готовим draft. Внешний send/publish — отдельный 7-day action.
-- Не force-push после baseline tag `pilot-01-start-<handle>`.
-- Не push в `main`; только participant branch и PR.
+- Не force-push после baseline tag, показанного `scripts/init-participant.sh`.
+- Не push в `main` или `rehearsal/**`; только participant branch и PR.
 
 ## Finish
 
 ```bash
-bash scripts/check-submission.sh <handle> origin/main
+bash scripts/check-submission.sh <handle> <origin/base-branch>
 ```
 
 Затем покажи участнику diff и дай ему самому подтвердить PR и внешние действия.

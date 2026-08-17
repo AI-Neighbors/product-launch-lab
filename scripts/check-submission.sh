@@ -22,7 +22,6 @@ if [[ $# -lt 1 || $# -gt 2 ]]; then
 fi
 
 handle="$1"
-base_ref="${2:-${BASE_REF:-origin/main}}"
 
 if [[ ! "$handle" =~ ^[A-Za-z0-9_.-]+$ ]]; then
   fail "invalid GitHub handle: $handle"
@@ -46,10 +45,44 @@ required=(
 )
 
 branch="${GITHUB_HEAD_REF:-$(git branch --show-current)}"
-if [[ -n "$branch" && "$branch" != "pilot-01/$handle" ]]; then
-  fail "expected branch pilot-01/$handle, found $branch"
-else
+expected_base_branch=""
+expected_baseline_tag=""
+
+case "$branch" in
+  "pilot-01/$handle")
+    expected_base_branch="main"
+    expected_baseline_tag="pilot-01-start-$handle"
+    ;;
+  test/*/"$handle")
+    run_id="${branch#test/}"
+    run_id="${run_id%/"$handle"}"
+    if [[ ! "$run_id" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]; then
+      fail "invalid rehearsal run ID in branch: $branch"
+    else
+      expected_base_branch="rehearsal/$run_id"
+      expected_baseline_tag="test-$run_id-start-$handle"
+    fi
+    ;;
+  *)
+    fail "expected pilot-01/$handle or test/<run-id>/$handle, found $branch"
+    ;;
+esac
+
+if [[ -n "$expected_base_branch" ]]; then
   pass "branch matches participant"
+fi
+
+if [[ $# -eq 2 ]]; then
+  base_ref="$2"
+elif [[ -n "${BASE_REF:-}" ]]; then
+  base_ref="$BASE_REF"
+elif [[ -n "$expected_base_branch" ]]; then
+  base_ref="origin/$expected_base_branch"
+else
+  base_ref="origin/main"
+fi
+if [[ -n "${GITHUB_BASE_REF:-}" && "$GITHUB_BASE_REF" != "$expected_base_branch" ]]; then
+  fail "expected PR base $expected_base_branch, found $GITHUB_BASE_REF"
 fi
 
 for file in "${required[@]}"; do
@@ -95,7 +128,8 @@ if [[ -s "$submission" ]]; then
   [[ ${#cta} -ge 5 ]] || fail "CTA is empty or too short"
   [[ ${#metric} -ge 10 ]] || fail "7-day metric is empty or too short"
   [[ "$first_send" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || fail "First send/publish date must be YYYY-MM-DD"
-  [[ "$baseline_tag" == "pilot-01-start-$handle" ]] || fail "Baseline tag must be pilot-01-start-$handle"
+  [[ -n "$expected_baseline_tag" && "$baseline_tag" == "$expected_baseline_tag" ]] || \
+    fail "Baseline tag must be $expected_baseline_tag"
 
   if [[ "${CHECK_VIDEO_URL:-0}" == "1" && "$video_url" =~ ^https:// ]]; then
     if curl -L --fail --silent --show-error --max-time 15 --head "$video_url" >/dev/null 2>&1 || \

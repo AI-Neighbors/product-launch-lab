@@ -23,3 +23,9 @@
 - [ ] Изменена только моя participant folder.
 - [ ] Facts и limitations проверены.
 - [ ] External send/publish будет отдельным решением.
+
+## Optional rehearsal retro
+
+- Coach helped with:
+- Biggest blocker:
+- Change before the next pilot:

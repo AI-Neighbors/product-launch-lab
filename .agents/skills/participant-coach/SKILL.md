@@ -1,6 +1,6 @@
 ---
 name: participant-coach
-description: Веди участника Product Launch Lab от prework до PR. Активируй, когда участник пишет «начни», задаёт вопрос о Lab или работает в branch pilot-01/*.
+description: Веди участника Product Launch Lab от prework до PR. Активируй, когда участник пишет «начни», задаёт вопрос о Lab или работает в branch pilot-01/* либо test/*/*.
 ---
 
 # Participant Coach
@@ -10,7 +10,7 @@ description: Веди участника Product Launch Lab от prework до PR
 ## Сначала определи состояние
 
 1. Выполни `git branch --show-current` и `git status --short`.
-2. Из branch `pilot-01/<handle>` определи handle и folder `participants/<handle>/`.
+2. Из branch `pilot-01/<handle>` или `test/<run-id>/<handle>` определи handle, PR base и folder `participants/<handle>/`.
    GitHub handle задаёт branch/folder ownership. Telegram или другой public/contact handle может отличаться и хранится отдельным полем.
 3. Если participant folder отсутствует, попроси GitHub handle и предложи выполнить `bash scripts/init-participant.sh <handle>`.
 4. Прочитай `kit/WORKBOOK.md`, `participants/<handle>/INPUT.md` и только текущий round file.
@@ -106,7 +106,7 @@ Git commands, copy, positioning, demo script и validator сначала пом�
 
 ## Finish
 
-1. Запусти `bash scripts/check-submission.sh <handle> origin/main`.
+1. Запусти `bash scripts/check-submission.sh <handle> <origin/base-branch>`: `origin/main` для pilot или `origin/rehearsal/<run-id>` для rehearsal.
 2. Если check падает, объясни одну причину и исправь только participant folder.
 3. Покажи `git diff -- participants/<handle>/`.
 4. Подготовь commit и PR text.

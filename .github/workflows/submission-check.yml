@@ -2,7 +2,9 @@ name: Submission check
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - "rehearsal/**"
 
 permissions:
   contents: read
@@ -22,11 +24,16 @@ jobs:
       - name: Validate participant branch
         env:
           HEAD_BRANCH: ${{ github.head_ref }}
+          BASE_BRANCH: ${{ github.base_ref }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           if [[ "$HEAD_BRANCH" == pilot-01/* ]]; then
             handle="${HEAD_BRANCH#pilot-01/}"
-            GITHUB_HEAD_REF="$HEAD_BRANCH" bash scripts/check-submission.sh "$handle" "$BASE_SHA"
+          elif [[ "$HEAD_BRANCH" == test/*/* ]]; then
+            handle="${HEAD_BRANCH##*/}"
           else
             echo "Maintenance branch: participant-specific validation skipped"
+            exit 0
           fi
+          GITHUB_HEAD_REF="$HEAD_BRANCH" GITHUB_BASE_REF="$BASE_BRANCH" \
+            bash scripts/check-submission.sh "$handle" "$BASE_SHA"

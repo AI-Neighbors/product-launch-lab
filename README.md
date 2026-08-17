@@ -1,6 +1,6 @@
 ---
 title: Product Launch Lab
-version: 0.4.0
+version: 0.5.0
 updated: 2026-08-17
 status: ready-for-pilot
 ---
@@ -37,7 +37,15 @@ cd product-launch-lab
 bash scripts/init-participant.sh YOUR_GITHUB_HANDLE
 ```
 
-Команда создаёт branch/folder и включает repo-local hook, который блокирует прямой push в `main`.
+Команда создаёт branch/folder и включает repo-local hook, который блокирует прямой push в `main` и `rehearsal/**`.
+
+Для rehearsal организатор сначала создаёт `rehearsal/<run-id>`, затем участник запускает:
+
+```bash
+bash scripts/init-participant.sh YOUR_GITHUB_HANDLE --test RUN_ID
+```
+
+Рабочая ветка будет `test/<run-id>/<github-handle>`, PR base — `rehearsal/<run-id>`.
 
 Запусти Codex или другой coding agent в корне repo и напиши:
 
