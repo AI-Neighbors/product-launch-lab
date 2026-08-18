@@ -1,0 +1,357 @@
+{
+  "schema": "task.v0.1",
+  "id": "product-launch-lab-participant-kit-rehearsal",
+  "title": "Build and rehearse the Product Launch Lab participant kit",
+  "project": "product-launch-lab-participant-kit",
+  "type": "story",
+  "status": "in_progress",
+  "priority": "high",
+  "owner": "developerisnow",
+  "created": "2026-08-17T00:00:00Z",
+  "updated": "2026-08-18T10:20:00Z",
+  "summary": "Record the shared kit, guided coach, branch-safe rehearsal, HealthOS dogfood, and idea-stage entry gate while the rehearsal PR still needs a passing participant check.",
+  "estimate_points": 5,
+  "size": "M",
+  "labels": [
+    "worktype/story",
+    "execution/coaching",
+    "confidence/high",
+    "verify/receipt"
+  ],
+  "task_links": {
+    "parent": null,
+    "related": [],
+    "blocks": [],
+    "blocked_by": []
+  },
+  "scope": {
+    "in": [
+      "Record the participant workbook and guarded Git flow",
+      "Record the guided participant coach and identity boundary",
+      "Record the isolated rehearsal branch contract and HealthOS dogfood",
+      "Record the idea-stage validation gate"
+    ],
+    "out": [
+      "No participant application data or private product source",
+      "No raw rehearsal merge to main",
+      "No merge of the open rehearsal PR",
+      "No organizer operations copied into participant materials"
+    ]
+  },
+  "description": {
+    "context": [
+      "The participant repository was created as a separate surface from private organizer operations.",
+      "The durable lane spans the shared workbook, a one-step-at-a-time coach, a rehearsal branch contract, one HealthOS dogfood capsule, and an idea-stage entry path.",
+      "Rehearsal PR #1 remains open and its participant validation check is failing."
+    ],
+    "requirements": [
+      {
+        "text": "Provide a bounded three-round participant workbook and guarded main branch",
+        "done": true
+      },
+      {
+        "text": "Provide a one-step-at-a-time participant coach with separate GitHub and contact identities",
+        "done": true
+      },
+      {
+        "text": "Keep rehearsal work on test branch to rehearsal base, never raw to main",
+        "done": true
+      },
+      {
+        "text": "Support idea-stage participants through validation before build",
+        "done": true
+      },
+      {
+        "text": "Make the HealthOS rehearsal submission check pass and complete review of PR #1",
+        "done": false
+      }
+    ],
+    "jtbd": "When a participant joins at idea, prototype, or working-product stage, give them a warm one-step coach and branch-safe artifacts that end in a reviewable launch capsule.",
+    "goal": "A reusable participant kit proven through one isolated rehearsal without leaking participant or organizer-private data.",
+    "non_goals": [
+      "Do not require a working landing before the Lab",
+      "Do not build the participant's product inside this repository",
+      "Do not auto-publish, message, invite, push, or merge for the participant"
+    ],
+    "acceptance": [
+      {
+        "id": "A1",
+        "text": "The kit produces positioning, demo, distribution, and submission artifacts through three timeboxed rounds.",
+        "done": true
+      },
+      {
+        "id": "A2",
+        "text": "The coach asks for one next action at a time and keeps unsupported claims as hypotheses.",
+        "done": true
+      },
+      {
+        "id": "A3",
+        "text": "Test branches target rehearsal branches and raw rehearsal output never targets main.",
+        "done": true
+      },
+      {
+        "id": "A4",
+        "text": "Idea-stage participants are guided to a validation proof before a landing or build requirement.",
+        "done": true
+      },
+      {
+        "id": "A5",
+        "text": "HealthOS rehearsal PR #1 has a passing submission check and is ready for human review.",
+        "done": false
+      }
+    ],
+    "evidence": [
+      {
+        "kind": "file",
+        "label": "Participant workbook",
+        "path": "kit/WORKBOOK.md",
+        "url": null,
+        "command": null,
+        "status": "verified",
+        "public": true,
+        "verified_at": "2026-08-18T10:20:00Z",
+        "note": "Defines positioning, demo, distribution, and PR finish."
+      },
+      {
+        "kind": "file",
+        "label": "Participant coach skill",
+        "path": ".agents/skills/participant-coach/SKILL.md",
+        "url": null,
+        "command": null,
+        "status": "verified",
+        "public": true,
+        "verified_at": "2026-08-18T10:20:00Z",
+        "note": "Defines the warm one-step coaching contract."
+      },
+      {
+        "kind": "pr",
+        "label": "HealthOS rehearsal PR",
+        "path": null,
+        "url": "https://github.com/AI-Neighbors/product-launch-lab/pull/1",
+        "command": "gh pr checks 1",
+        "status": "blocked",
+        "public": true,
+        "verified_at": "2026-08-18T10:20:00Z",
+        "note": "Open draft PR targets the rehearsal branch and currently fails validate-submission."
+      },
+      {
+        "kind": "pr",
+        "label": "Idea-stage coaching gate",
+        "path": null,
+        "url": "https://github.com/AI-Neighbors/product-launch-lab/pull/2",
+        "command": "gh pr view 2",
+        "status": "verified",
+        "public": true,
+        "verified_at": "2026-08-18T10:20:00Z",
+        "note": "Merged to main as 9bf72ab; its generic submission check failed but did not block the docs merge."
+      }
+    ],
+    "risks": [
+      "Participant and contact identities can differ; Git ownership must use the GitHub handle.",
+      "A generic submission check can misclassify maintainer-only docs changes.",
+      "Raw participant or rehearsal output must not become a curated public example by accident."
+    ]
+  },
+  "execution": {
+    "inputs": [
+      "kit/WORKBOOK.md",
+      ".agents/skills/participant-coach/SKILL.md",
+      "AGENTS.md branch contract",
+      "GitHub PR #1 and PR #2",
+      "Exact Product Launch Lab CCE sessions"
+    ],
+    "constraints": [
+      "Use a maintainer branch and reviewable PR for task-history changes",
+      "Keep participant content and private product source out of task JSON",
+      "Do not merge open rehearsal work"
+    ],
+    "output": "One compact participant-kit recovery rail with exact branch, PR, and Git receipts.",
+    "verify": [
+      "python3 /home/user/.codex/skills/task-json-rail/scripts/task_json_validate.py --registry tasks/project.registry.json --task tasks/20260818-product-launch-lab-participant-kit-rehearsal.story.json",
+      "bash scripts/test-event-kit.sh",
+      "git diff --check"
+    ],
+    "escalate_if": [
+      "The task-history PR would need participant data",
+      "Fixing rehearsal PR #1 requires changing another active participant branch"
+    ]
+  },
+  "agents": [
+    {
+      "agent_alias": "product-lab-steward",
+      "agent_session_id": "01a00ff5-5671-71c0-905a-952b525986fc",
+      "agent_device": "eywa1",
+      "agent_runtime": "codex-cli",
+      "roles": [
+        "steward",
+        "verifier"
+      ],
+      "status": "active",
+      "scope": [
+        "participant-history",
+        "maintainer-pr"
+      ],
+      "touched_at": "2026-08-18T10:20:00Z",
+      "handoff": "Fix or classify the failing rehearsal submission check before PR #1 review."
+    }
+  ],
+  "iterations": [
+    {
+      "id": "iter-kit-and-guarded-git",
+      "status": "done",
+      "goal": "Ship the shared launch workbook with a local main push guard.",
+      "recovery": {
+        "session_refs": [
+          {
+            "session_id": "01a00490-7bfb-7143-bb26-17a7d762c97e",
+            "turns": {
+              "from": 84,
+              "to": 87
+            },
+            "purpose": "Recover participant repository creation, workbook, and guarded Git flow"
+          }
+        ],
+        "outcome": "The participant repository gained a three-round workbook and local protection against accidental main pushes.",
+        "decisions": [
+          "Participant artifacts live in a separate repository from organizer operations."
+        ],
+        "receipts": [
+          {
+            "kind": "commit",
+            "ref": "25f2952,8807120"
+          }
+        ],
+        "next_action": null
+      },
+      "microtasks": [],
+      "handoffs": []
+    },
+    {
+      "id": "iter-guided-coach-and-identity",
+      "status": "done",
+      "goal": "Give every participant a warm one-step coach without conflating Git and contact identities.",
+      "recovery": {
+        "session_refs": [
+          {
+            "session_id": "01a00490-7bfb-7143-bb26-17a7d762c97e",
+            "turns": {
+              "from": 88,
+              "to": 91
+            },
+            "purpose": "Recover participant-coach and identity-boundary implementation"
+          }
+        ],
+        "outcome": "A repository-local coach now guides one current artifact and next action while keeping GitHub ownership separate from contact handles.",
+        "decisions": [
+          "Use plain product questions first; frameworks remain optional scaffolding, not participant cargo cult."
+        ],
+        "receipts": [
+          {
+            "kind": "commit",
+            "ref": "5d46955,f1949a0"
+          }
+        ],
+        "next_action": null
+      },
+      "microtasks": [],
+      "handoffs": []
+    },
+    {
+      "id": "iter-rehearsal-and-healthos-dogfood",
+      "status": "in_progress",
+      "goal": "Prove the branch contract through an isolated HealthOS rehearsal capsule.",
+      "recovery": {
+        "session_refs": [
+          {
+            "session_id": "01a00490-7bfb-7143-bb26-17a7d762c97e",
+            "turns": {
+              "from": 92,
+              "to": 97
+            },
+            "purpose": "Recover rehearsal branch design, merge direction, contract lock, and HealthOS dogfood"
+          }
+        ],
+        "outcome": "HealthOS produced a complete launch capsule on an isolated test branch, but the draft rehearsal PR still has a failing submission check.",
+        "decisions": [
+          "Raw rehearsal merges test branch to rehearsal branch, never to main.",
+          "A curated example requires a separate maintainer PR later."
+        ],
+        "receipts": [
+          {
+            "kind": "commit",
+            "ref": "a84dbaf,31faee6,92d49a9,899fe12"
+          },
+          {
+            "kind": "pr",
+            "ref": "https://github.com/AI-Neighbors/product-launch-lab/pull/1"
+          }
+        ],
+        "next_action": "Fix or classify validate-submission on rehearsal PR #1, then return it for human review."
+      },
+      "microtasks": [
+        {
+          "id": "mt-rehearsal-check",
+          "title": "Make rehearsal PR #1 submission check pass",
+          "status": "todo"
+        }
+      ],
+      "handoffs": []
+    },
+    {
+      "id": "iter-idea-stage-entry",
+      "status": "done",
+      "goal": "Let idea-stage participants enter through validation instead of a mandatory landing build.",
+      "recovery": {
+        "session_refs": [
+          {
+            "session_id": "01a00ff5-5671-71c0-905a-952b525986fc",
+            "turns": {
+              "from": 20,
+              "to": 28
+            },
+            "purpose": "Recover the landing-readiness decision and idea-stage coach gate"
+          }
+        ],
+        "outcome": "The coach accepts idea-stage projects and asks for a validation proof before optional landing work.",
+        "decisions": [
+          "A working landing is desirable preparation, not an admission gate.",
+          "Validate the buyer, trigger, and promise before building presentation surfaces."
+        ],
+        "receipts": [
+          {
+            "kind": "commit",
+            "ref": "c981f91,9bf72ab"
+          },
+          {
+            "kind": "pr",
+            "ref": "https://github.com/AI-Neighbors/product-launch-lab/pull/2"
+          }
+        ],
+        "next_action": null
+      },
+      "microtasks": [],
+      "handoffs": []
+    }
+  ],
+  "projections": [
+    {
+      "provider": "local",
+      "role": "primary",
+      "state": "active",
+      "required": true,
+      "external_id": null,
+      "url": null,
+      "last_synced_at": null,
+      "sync_events": [],
+      "projected_fields": [
+        "title",
+        "status",
+        "priority",
+        "type",
+        "summary",
+        "estimate_points",
+        "labels"
+      ]
+    }
+  ]
+}
