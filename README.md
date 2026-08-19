@@ -1,6 +1,5 @@
 ---
 title: Product Launch Lab
-version: 0.6.0
 updated: 2026-08-17
 status: ready-for-pilot
 ---
@@ -80,6 +79,8 @@ Base уже видна на GitHub: [`rehearsal/2026W34-healthos-01`](https://gi
 ```
 
 Project-local Participant Coach определит current phase, покажет один exact file и будет задавать по одному вопросу. Можно спрашивать что угодно: сначала он ответит, затем вернёт тебя к текущему шагу.
+
+`init-participant.sh` записывает в `INPUT.md` версию Participant Kit и base commit. Возможности версий: [`kit/CHANGELOG.md`](kit/CHANGELOG.md).
 
 До встречи:
 
