@@ -33,18 +33,6 @@
 - Product source можно читать по явно указанному участником пути, но нельзя изменять или копировать в этот repo.
 - Video хранится по shareable HTTPS URL; video-файлы в Git не добавляются.
 
-## Organizer control plane
-
-- Этот repo — participant execution surface, не organizer control plane.
-- Никогда не добавляй сюда `tasks/`, task-json registry, CCE recovery refs или
-  проекции organizer backlog в GitHub Issues — даже для historical backfill.
-- Историю kit, coach и rehearsal веди в
-  `AI-Neighbors/hackathon-gtd__llmneighbors/tasks/`; commits и PR этого repo
-  прикладывай там как external receipts.
-- Прогресс участника живёт в его round files, `SUBMISSION.md` и participant PR.
-- Issues этого repo допустимы только для явно одобренных public kit defects или
-  feature requests, но не как проекция steward task rails.
-
 ## Content contract
 
 - Пиши конкретно: audience, trigger, current alternative, observable outcome, proof, limitation, CTA.
