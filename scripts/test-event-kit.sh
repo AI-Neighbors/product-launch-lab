@@ -8,6 +8,8 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/product-launch-lab-test.XXXXXX")"
 expected_kit_version="$(tr -d '[:space:]' < "$repo_root/VERSION")"
 
+bash -n "$repo_root"/scripts/*.sh "$repo_root"/.githooks/pre-push
+[[ -z "${1:-}" ]] || git -C "$repo_root" diff --check "${1}...HEAD"
 bash "$repo_root/scripts/check-kit-version.sh" "${1:-}"
 test -s "$repo_root/.agents/skills/participant-coach/SKILL.md"
 test -s "$repo_root/kit/CHANGELOG.md"
