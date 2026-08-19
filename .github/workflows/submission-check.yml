@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: Test event kit
-        run: bash scripts/test-event-kit.sh
+        run: bash scripts/test-event-kit.sh "${{ github.event.pull_request.base.sha }}"
 
       - name: Validate participant branch
         env:

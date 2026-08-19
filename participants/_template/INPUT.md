@@ -6,6 +6,8 @@
 
 - GitHub handle: REPLACE_ME
 - Public/contact handle (optional): REPLACE_ME
+- Participant Kit version: REPLACE_ME
+- Kit base commit: REPLACE_ME
 - Product name: REPLACE_ME
 - Product URL or local demo path (если уже есть): REPLACE_ME
 - Stage: REPLACE_ME

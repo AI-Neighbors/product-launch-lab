@@ -6,8 +6,11 @@ unset GITHUB_HEAD_REF GITHUB_BASE_REF
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/product-launch-lab-test.XXXXXX")"
+expected_kit_version="$(tr -d '[:space:]' < "$repo_root/VERSION")"
 
+bash "$repo_root/scripts/check-kit-version.sh" "${1:-}"
 test -s "$repo_root/.agents/skills/participant-coach/SKILL.md"
+test -s "$repo_root/kit/CHANGELOG.md"
 grep -Fq '.agents/skills/participant-coach/SKILL.md' "$repo_root/AGENTS.md"
 grep -Fq 'test/<run-id>/<handle>` | `rehearsal/<run-id>' "$repo_root/AGENTS.md"
 grep -Fq 'Для test branch никогда не подставляй `origin/main`' "$repo_root/.agents/skills/participant-coach/SKILL.md"
@@ -23,6 +26,7 @@ mkdir -p "$tmp_dir/scripts" "$tmp_dir/participants" "$tmp_dir/.githooks"
 cp "$repo_root/scripts/check-submission.sh" "$repo_root/scripts/init-participant.sh" "$tmp_dir/scripts/"
 cp -R "$repo_root/participants/_template" "$tmp_dir/participants/"
 cp "$repo_root/.githooks/pre-push" "$tmp_dir/.githooks/"
+cp "$repo_root/VERSION" "$tmp_dir/"
 
 cd "$tmp_dir"
 git init -q -b main
@@ -30,7 +34,11 @@ git config user.name "Event Kit Test"
 git config user.email "event-kit@example.invalid"
 git add .
 git commit -qm "test: baseline"
+pilot_base="$(git rev-parse HEAD)"
 bash scripts/init-participant.sh alex >/dev/null
+
+grep -Fq -- "- Participant Kit version: $expected_kit_version" participants/alex/INPUT.md
+grep -Fq -- "- Kit base commit: $pilot_base" participants/alex/INPUT.md
 
 [[ "$(git config core.hooksPath)" == ".githooks" ]]
 if printf 'refs/heads/main local refs/heads/main remote\n' | .githooks/pre-push origin example >/dev/null 2>&1; then

@@ -79,11 +79,26 @@ else
 fi
 git switch -c "$branch"
 cp -R participants/_template "$folder"
+
+kit_version="$(tr -d '[:space:]' < VERSION)"
+if [[ ! "$kit_version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+  echo "Invalid Participant Kit version in VERSION" >&2
+  exit 1
+fi
+kit_base_commit="$(git rev-parse HEAD)"
+sed -i.bak \
+  -e "s/- Participant Kit version: REPLACE_ME/- Participant Kit version: $kit_version/" \
+  -e "s/- Kit base commit: REPLACE_ME/- Kit base commit: $kit_base_commit/" \
+  "$folder/INPUT.md"
+rm -f -- "$folder/INPUT.md.bak"
+
 git config core.hooksPath .githooks
 
 echo "READY: $branch"
 echo "BASE: $base_branch"
 echo "BASELINE: $baseline_tag"
+echo "KIT_VERSION: $kit_version"
+echo "KIT_BASE: $kit_base_commit"
 echo "NEXT: fill $folder/INPUT.md"
 echo "GUARD: repo-local hook blocks direct pushes to main and rehearsal branches"
 echo "AGENT: say 'Я $handle. Продукт <название>. Начни Product Launch Lab.'"

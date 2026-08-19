@@ -1,6 +1,5 @@
 ---
 title: Product Launch Lab Workbook
-version: 0.2.0
 updated: 2026-08-17
 status: ready-for-pilot
 ---
