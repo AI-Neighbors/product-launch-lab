@@ -13,11 +13,34 @@ bash -n "$repo_root"/scripts/*.sh "$repo_root"/.githooks/pre-push
 bash "$repo_root/scripts/check-kit-version.sh" "${1:-}"
 test -s "$repo_root/.agents/skills/participant-coach/SKILL.md"
 test -s "$repo_root/kit/CHANGELOG.md"
+test -s "$repo_root/kit/evals/coach-cases.json"
+test -s "$repo_root/kit/EVALS.md"
 grep -Fq '.agents/skills/participant-coach/SKILL.md' "$repo_root/AGENTS.md"
 grep -Fq 'test/<run-id>/<handle>` | `rehearsal/<run-id>' "$repo_root/AGENTS.md"
 grep -Fq 'Для test branch никогда не подставляй `origin/main`' "$repo_root/.agents/skills/participant-coach/SKILL.md"
 grep -Fq 'git push --dry-run origin' "$repo_root/.agents/skills/participant-coach/SKILL.md"
 grep -Fq 'Triage' "$repo_root/.agents/skills/participant-coach/SKILL.md"
+grep -Fq '## PR rescue mode' "$repo_root/.agents/skills/participant-coach/SKILL.md"
+
+python3 - "$repo_root/kit/evals/coach-cases.json" "$repo_root/.agents/skills/participant-coach/SKILL.md" <<'PY'
+import json
+import sys
+
+cases_path, coach_path = sys.argv[1:]
+with open(cases_path, encoding="utf-8") as handle:
+    payload = json.load(handle)
+cases = payload["cases"]
+assert payload["required_output"] == ["phase", "file", "evidence", "decision", "next_action"]
+assert len(cases) == 6
+assert len({case["id"] for case in cases}) == len(cases)
+coach = open(coach_path, encoding="utf-8").read()
+for case in cases:
+    for key in ("id", "stage", "signals", "decision", "file", "next_action", "must_not"):
+        assert case[key], f"missing eval field: {case['id']}:{key}"
+    assert coach.count(f"`{case['decision']}`") == 1, case["decision"]
+    assert len(case["must_not"]) >= 1
+print("RESULT: coach eval contract passed")
+PY
 
 cleanup() {
   if [[ -n "${tmp_dir:-}" && -d "$tmp_dir" && "$tmp_dir" == *product-launch-lab-test.* ]]; then

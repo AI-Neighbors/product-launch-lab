@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "purpose": "Synthetic contract cases for Participant Coach PR rescue; no model or network calls.",
+  "required_output": ["phase", "file", "evidence", "decision", "next_action"],
+  "cases": [
+    {
+      "id": "idea-incomplete-asset",
+      "stage": "idea",
+      "signals": ["positioning-present", "demo-asset-missing", "video-missing"],
+      "decision": "build_validation_asset_and_video",
+      "file": "02-DEMO.md",
+      "next_action": "Build one validation page with one CTA and record a 60–90s walkthrough.",
+      "must_not": ["require-backend", "call-hypothesis-proof"]
+    },
+    {
+      "id": "idea-asset-ready",
+      "stage": "idea",
+      "signals": ["positioning-present", "demo-asset-present", "video-present", "distribution-empty"],
+      "decision": "complete_distribution",
+      "file": "03-DISTRIBUTION.md",
+      "next_action": "Fill one channel, post, DM, ten targets and one seven-day metric.",
+      "must_not": ["add-second-wedge"]
+    },
+    {
+      "id": "working-demo-video-missing",
+      "stage": "public-demo",
+      "signals": ["demo-scenario-present", "video-missing"],
+      "decision": "record_demo_video",
+      "file": "02-DEMO.md",
+      "next_action": "Record one end-to-end scenario and verify its URL in incognito.",
+      "must_not": ["architecture-tour"]
+    },
+    {
+      "id": "permission-403",
+      "stage": "any",
+      "signals": ["push-403", "triage-role"],
+      "decision": "route_permission_to_organizer",
+      "file": "organizer-access",
+      "next_action": "Send the exact 403 and repository handle to the organizer; do not recreate the branch.",
+      "must_not": ["blame-participant", "retry-loop"]
+    },
+    {
+      "id": "wrong-rehearsal-base",
+      "stage": "rehearsal",
+      "signals": ["test-branch", "base-main"],
+      "decision": "correct_branch_base",
+      "file": "branch-contract",
+      "next_action": "Use test/<run-id>/<handle> → rehearsal/<run-id> and rerun the validator.",
+      "must_not": ["use-origin-main"]
+    },
+    {
+      "id": "capsule-ready",
+      "stage": "any",
+      "signals": ["required-files-complete", "ci-green"],
+      "decision": "ready_for_human_review",
+      "file": "SUBMISSION.md",
+      "next_action": "Show the scoped diff and stop before any external send or publish.",
+      "must_not": ["auto-publish", "auto-merge"]
+    }
+  ]
+}

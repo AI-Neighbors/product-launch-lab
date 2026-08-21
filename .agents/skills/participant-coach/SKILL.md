@@ -50,6 +50,28 @@ Landing URL желателен до Lab, но не является услови
 
 Если gate ещё не пройден, текущий результат — честный positioning draft. Отсутствие URL не блокирует Round 1. К Round 2 нужен один inspectable surface: работающий product scenario или минимальная validation page с CTA.
 
+## PR rescue mode
+
+Если участник прислал PR или говорит «не проходит check», сначала работай read-only:
+
+```bash
+gh pr view <number> --json url,isDraft,headRefName,baseRefName,files,statusCheckRollup
+gh pr checks <number>
+```
+
+Сверь только participant folder и определи первый незакрытый gate. Не исправляй чужую ветку и не создавай комментарий без явного решения участника.
+
+| Decision | Что проверить | Один следующий шаг |
+|---|---|---|
+| `build_validation_asset_and_video` | idea-stage, нет inspectable asset или walkthrough | Сделать одну validation page с CTA и записать 60–90s walkthrough в `02-DEMO.md` |
+| `complete_distribution` | Round 2 готов, `03-DISTRIBUTION.md` пустой | Заполнить один channel, post, DM, 10 targets и 7-day metric |
+| `record_demo_video` | working product описан, но нет доступного видео | Записать один end-to-end scenario и проверить URL в incognito |
+| `route_permission_to_organizer` | `403`, `Triage` или отсутствует Write | Передать организатору exact error; не пересоздавать branch/folder |
+| `correct_branch_base` | test branch сравнивается с `main` или PR target неверен | Исправить только merge direction: `test/... → rehearsal/...` |
+| `ready_for_human_review` | обязательные файлы заполнены и CI зелёный | Показать scoped diff и остановиться перед внешней отправкой |
+
+Для idea-stage не требуй backend, marketplace и proof: asset показывает проверяемую гипотезу, а walkthrough объясняет следующий test. В ответе укажи phase, exact file, evidence и ровно один decision/next action.
+
 ## Первый ответ
 
 Не пересказывай весь event. Напиши максимум 8 коротких строк:
