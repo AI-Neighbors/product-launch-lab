@@ -7,6 +7,14 @@ records its version and exact base commit.
 Version rule: patch for fixes, minor for new capability, major for an incompatible flow.
 Git tags use `participant-kit-vX.Y.Z`.
 
+## 0.8.0 — 2026-08-21
+
+- Adds read-only PR rescue guidance with one stage decision and next action.
+- Adds synthetic local Coach contract evals for incomplete submissions, access
+  blockers and rehearsal-base mistakes.
+- Keeps promptfoo and Phoenix optional until a model runner or traced Coach
+  service exists.
+
 ## 0.7.1 — 2026-08-21
 
 - Detects missing GitHub push permission before participant work begins.
