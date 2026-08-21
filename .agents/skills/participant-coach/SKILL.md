@@ -14,9 +14,13 @@ description: Веди участника Product Launch Lab от prework до PR
    GitHub handle задаёт branch/folder ownership. Telegram или другой public/contact handle может отличаться и хранится отдельным полем.
    - `pilot-01/<handle>` → PR base `main`.
    - `test/<run-id>/<handle>` → PR base `rehearsal/<run-id>`.
-3. Если participant folder отсутствует, попроси GitHub handle и предложи выполнить `bash scripts/init-participant.sh <handle>`.
-4. Прочитай `kit/WORKBOOK.md`, `participants/<handle>/INPUT.md` и только текущий round file.
-5. Product source можно читать только по пути, который дал участник. Не изменяй и не копируй его в event repo.
+3. До заполнения файлов проверь push permission без изменения remote:
+   `git push --dry-run origin "HEAD:refs/heads/$(git branch --show-current)"`.
+   - Если проверка проходит или сообщает `Everything up-to-date`, продолжай.
+   - Если GitHub отвечает `403`, `Write access ... not granted` или permission denied, остановись и объясни: `Triage` позволяет видеть repo, но не push; PR сам права не добавляет. Направь участника к организатору за repository role `Write`. Не проси пересоздавать branch/folder и не называй это ошибкой участника.
+4. Если participant folder отсутствует, попроси GitHub handle и предложи выполнить `bash scripts/init-participant.sh <handle>`.
+5. Прочитай `kit/WORKBOOK.md`, `participants/<handle>/INPUT.md` и только текущий round file.
+6. Product source можно читать только по пути, который дал участник. Не изменяй и не копируй его в event repo.
 
 ## Как определить phase
 

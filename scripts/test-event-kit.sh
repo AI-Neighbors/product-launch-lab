@@ -16,6 +16,8 @@ test -s "$repo_root/kit/CHANGELOG.md"
 grep -Fq '.agents/skills/participant-coach/SKILL.md' "$repo_root/AGENTS.md"
 grep -Fq 'test/<run-id>/<handle>` | `rehearsal/<run-id>' "$repo_root/AGENTS.md"
 grep -Fq 'Для test branch никогда не подставляй `origin/main`' "$repo_root/.agents/skills/participant-coach/SKILL.md"
+grep -Fq 'git push --dry-run origin' "$repo_root/.agents/skills/participant-coach/SKILL.md"
+grep -Fq 'Triage' "$repo_root/.agents/skills/participant-coach/SKILL.md"
 
 cleanup() {
   if [[ -n "${tmp_dir:-}" && -d "$tmp_dir" && "$tmp_dir" == *product-launch-lab-test.* ]]; then
