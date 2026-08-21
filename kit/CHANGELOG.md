@@ -7,6 +7,11 @@ records its version and exact base commit.
 Version rule: patch for fixes, minor for new capability, major for an incompatible flow.
 Git tags use `participant-kit-vX.Y.Z`.
 
+## 0.7.1 — 2026-08-21
+
+- Detects missing GitHub push permission before participant work begins.
+- Explains that `Triage` cannot push a participant branch and routes `403` to the organizer without blaming the participant.
+
 ## 0.7.0 — 2026-08-19
 
 - Replaces conflicting per-document versions with one Participant Kit version.
