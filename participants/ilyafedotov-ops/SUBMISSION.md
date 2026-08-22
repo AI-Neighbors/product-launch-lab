@@ -4,18 +4,18 @@
 
 Artifacts: [`INPUT.md`](./INPUT.md) · [`01-POSITIONING.md`](./01-POSITIONING.md) · [`02-DEMO.md`](./02-DEMO.md) · [`03-DISTRIBUTION.md`](./03-DISTRIBUTION.md)
 
-- Participant GitHub handle: REPLACE_ME
-- Public/contact handle: REPLACE_ME
-- Product: REPLACE_ME
-- One-liner: REPLACE_ME
-- Product page URL: REPLACE_ME
+- Participant GitHub handle: ilyafedotov-ops
+- Public/contact handle: —
+- Product: EU Career Copilot
+- One-liner: Для инженера из Украины или России, который ищет работу в Германии и подаёт отклики через сайты десятков компаний, EU Career Copilot держит все отклики и их статусы в одном месте и готовит к каждому CV в немецком формате — из фактов, которые человек подтвердил сам, вместо заброшенной таблицы и ручной переписки в ChatGPT.
+- Product page URL: Product Card in 01-POSITIONING.md
 - Video URL: REPLACE_ME
-- Proof: REPLACE_ME
-- Limitation: REPLACE_ME
-- CTA: REPLACE_ME
+- Proof: Сквозной сценарий проходит на локальном стеке и закрыт автотестами: извлечение фактов на пяти комбинациях язык×формат на реальных файлах CV, браузерный тест скачивания документа, прогон на живых моделях. Показывается скачанным PDF и записью прогона. Спроса это не доказывает — внешних пользователей нет.
+- Limitation: Ранняя бета, работает только в режиме development на локальной машине — снаружи сегодня пройти сценарий нельзя. Сопроводительное письмо не генерируется. Дизайн-шаблоны меняют превью, но не скачиваемый файл. Продакшн-обработки персональных данных нет: DPA не подписан, EU-routing провайдера не открыт. Отклики за человека не подаются, ATS-score и вероятность найма не показываются. Рынок один — Германия.
+- CTA: 15-минутный разговор с человеком, который прямо сейчас ищет работу в Германии — показать запись прогона и спросить, какой из шагов он делал бы сам, а какой отдал бы.
 - 7-day metric: REPLACE_ME
 - First send/publish date: REPLACE_ME
-- Baseline tag: REPLACE_ME
+- Baseline tag: pilot-01-start-ilyafedotov-ops
 
 ## Checklist
 
